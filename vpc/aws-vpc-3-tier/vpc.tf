@@ -12,7 +12,7 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "dmz_a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_cidrs.dmz_a
-  availability_zone = "a"
+  availability_zone = var.availability_zones[0]
   tags = {
     Name = "${local.name_prefix}-dmz-subnet-a"
   }
@@ -21,7 +21,7 @@ resource "aws_subnet" "dmz_a" {
 resource "aws_subnet" "dmz_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_cidrs.dmz_b
-  availability_zone = "b"
+  availability_zone = var.availability_zones[1]
   tags = {
     Name = "${local.name_prefix}-dmz-subnet-b"
   }
@@ -30,7 +30,7 @@ resource "aws_subnet" "dmz_b" {
 resource "aws_subnet" "app_a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_cidrs.app_a
-  availability_zone = "a"
+  availability_zone = var.availability_zones[0]
   tags = {
     Name = "${local.name_prefix}-app-subnet-a"
   }
@@ -39,7 +39,7 @@ resource "aws_subnet" "app_a" {
 resource "aws_subnet" "app_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_cidrs.app_b
-  availability_zone = "b"
+  availability_zone = var.availability_zones[1]
   tags = {
     Name = "${local.name_prefix}-app-subnet-b"
   }
@@ -48,7 +48,7 @@ resource "aws_subnet" "app_b" {
 resource "aws_subnet" "db_a" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_cidrs.db_a
-  availability_zone = "a"
+  availability_zone = var.availability_zones[0]
   tags = {
     Name = "${local.name_prefix}-db-subnet-a"
   }
@@ -57,7 +57,7 @@ resource "aws_subnet" "db_a" {
 resource "aws_subnet" "db_b" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.subnet_cidrs.db_b
-  availability_zone = "b"
+  availability_zone = var.availability_zones[1]
   tags = {
     Name = "${local.name_prefix}-db-subnet-b"
   }

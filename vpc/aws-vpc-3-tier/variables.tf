@@ -3,8 +3,13 @@ variable "vpc_cidr" {
   type        = string
 }
 
+variable "availability_zones" {
+  description = "List of availability zones"
+  type        = list(string)
+}
+
 variable "environment" {
-  description = "Environment (e.g., dev, staging, prod)"
+  description = "Environment (e.g., dev, qa, prod)"
   type        = string
 }
 
