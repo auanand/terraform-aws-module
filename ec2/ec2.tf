@@ -1,5 +1,5 @@
 locals {
-  name_prefix = var.customer + "-" + var.product + "-" + var.environment + "-" + var.instance_name
+  name_prefix = "${var.customer}-${var.product}-${var.environment}-${var.instance_name}"
 }
 
 resource "aws_security_group" "instance_sg" {
