@@ -125,6 +125,8 @@ resource "aws_network_acl" "dmz" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 
   ingress {
@@ -132,16 +134,18 @@ resource "aws_network_acl" "dmz" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 }
 
 resource "aws_network_acl_association" "dmz_a" {
-  subnet_id     = aws_subnet.dmz_a.id
+  subnet_id      = aws_subnet.dmz_a.id
   network_acl_id = aws_network_acl.dmz.id
 }
 
 resource "aws_network_acl_association" "dmz_b" {
-  subnet_id     = aws_subnet.dmz_b.id
+  subnet_id      = aws_subnet.dmz_b.id
   network_acl_id = aws_network_acl.dmz.id
 }
 
@@ -156,6 +160,8 @@ resource "aws_network_acl" "app" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 
   ingress {
@@ -163,16 +169,18 @@ resource "aws_network_acl" "app" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 }
 
 resource "aws_network_acl_association" "app_a" {
-  subnet_id     = aws_subnet.app_a.id
+  subnet_id      = aws_subnet.app_a.id
   network_acl_id = aws_network_acl.app.id
 }
 
 resource "aws_network_acl_association" "app_b" {
-  subnet_id     = aws_subnet.app_b.id
+  subnet_id      = aws_subnet.app_b.id
   network_acl_id = aws_network_acl.app.id
 }
 
@@ -187,6 +195,8 @@ resource "aws_network_acl" "db" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 
   ingress {
@@ -194,16 +204,18 @@ resource "aws_network_acl" "db" {
     rule_no    = 100
     action     = "allow"
     cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
   }
 }
 
 resource "aws_network_acl_association" "db_a" {
-  subnet_id     = aws_subnet.db_a.id
+  subnet_id      = aws_subnet.db_a.id
   network_acl_id = aws_network_acl.db.id
 }
 
 resource "aws_network_acl_association" "db_b" {
-  subnet_id     = aws_subnet.db_b.id
+  subnet_id      = aws_subnet.db_b.id
   network_acl_id = aws_network_acl.db.id
 }
 
@@ -221,7 +233,7 @@ resource "aws_route" "dmz_route" {
 }
 
 resource "aws_eip" "nat" {
-  vpc = true
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "nat" {
