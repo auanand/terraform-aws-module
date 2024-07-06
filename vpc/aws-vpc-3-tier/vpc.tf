@@ -1,3 +1,35 @@
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+}
+
+variable "environment" {
+  description = "Environment (e.g., dev, staging, prod)"
+  type        = string
+}
+
+variable "customer" {
+  description = "Customer name"
+  type        = string
+}
+
+variable "product" {
+  description = "Product name"
+  type        = string
+}
+
+variable "subnet_cidrs" {
+  description = "CIDR blocks for subnets"
+  type = object({
+    dmz_a = string
+    dmz_b = string
+    app_a = string
+    app_b = string
+    db_a  = string
+    db_b  = string
+  })
+}
+
 locals {
   name_prefix = "${var.customer}-${var.product}-${var.environment}"
 }
@@ -136,12 +168,12 @@ resource "aws_network_acl" "dmz" {
 }
 
 resource "aws_network_acl_association" "dmz_a" {
-  subnet_id      = aws_subnet.dmz_a.id
+  subnet_id     = aws_subnet.dmz_a.id
   network_acl_id = aws_network_acl.dmz.id
 }
 
 resource "aws_network_acl_association" "dmz_b" {
-  subnet_id      = aws_subnet.dmz_b.id
+  subnet_id     = aws_subnet.dmz_b.id
   network_acl_id = aws_network_acl.dmz.id
 }
 
@@ -167,12 +199,12 @@ resource "aws_network_acl" "app" {
 }
 
 resource "aws_network_acl_association" "app_a" {
-  subnet_id      = aws_subnet.app_a.id
+  subnet_id     = aws_subnet.app_a.id
   network_acl_id = aws_network_acl.app.id
 }
 
 resource "aws_network_acl_association" "app_b" {
-  subnet_id      = aws_subnet.app_b.id
+  subnet_id     = aws_subnet.app_b.id
   network_acl_id = aws_network_acl.app.id
 }
 
@@ -198,12 +230,12 @@ resource "aws_network_acl" "db" {
 }
 
 resource "aws_network_acl_association" "db_a" {
-  subnet_id      = aws_subnet.db_a.id
+  subnet_id     = aws_subnet.db_a.id
   network_acl_id = aws_network_acl.db.id
 }
 
 resource "aws_network_acl_association" "db_b" {
-  subnet_id      = aws_subnet.db_b.id
+  subnet_id     = aws_subnet.db_b.id
   network_acl_id = aws_network_acl.db.id
 }
 
