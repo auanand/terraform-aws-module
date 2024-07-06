@@ -66,3 +66,16 @@ resource "aws_volume_attachment" "ebs_att" {
   instance_id  = element(aws_instance.ec2_instance[*].id, count.index)
   depends_on   = [aws_instance.ec2_instance]
 }
+
+resource "aws_eip" "elastic_ip" {
+  count      = var.elastic_ip_attachment ? var.instance_count : 0
+  vpc        = true
+  depends_on = [aws_instance.ec2_instance]
+}
+
+resource "aws_eip_association" "eip_association" {
+  count          = var.elastic_ip_attachment ? var.instance_count : 0
+  instance_id    = element(aws_instance.ec2_instance[*].id, count.index)
+  allocation_id  = element(aws_eip.elastic_ip[*].id, count.index)
+  depends_on     = [aws_instance.ec2_instance]
+}

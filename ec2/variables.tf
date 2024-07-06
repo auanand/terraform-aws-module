@@ -71,3 +71,9 @@ variable "data_volume_size" {
   type        = number
   default     = 20
 }
+
+variable "elastic_ip_attachment" {
+  description = "Boolean to determine if Elastic IP should be created and attached"
+  type        = bool
+  default     = false
+}
