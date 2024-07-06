@@ -1,6 +1,11 @@
 variable "instance_name" {
-  description = "Instance Name for the EC2 instance"
   type        = string
+  description = "Instance Name for the EC2 instance"
+
+  validation {
+    condition     = var.instance_name != ""
+    error_message = "The instance name must not be empty."
+  }
 }
 
 variable "instance_count" {
