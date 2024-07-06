@@ -3,7 +3,7 @@ output "instance_ids" {
   value       = aws_instance.ec2_instance[*].id
 }
 
-output "security_group_ids" {
+output "security_group_id" {
   description = "ID of the security group"
   value       = aws_security_group.instance_sg.id
 }
