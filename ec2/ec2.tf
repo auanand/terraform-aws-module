@@ -69,7 +69,6 @@ resource "aws_volume_attachment" "ebs_att" {
 
 resource "aws_eip" "elastic_ip" {
   count      = var.elastic_ip_attachment ? var.instance_count : 0
-  vpc        = true
   depends_on = [aws_instance.ec2_instance]
 }
 
