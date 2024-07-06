@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_security_group" "instance_sg" {
-  name        = local.name_prefix + "-sg"
+  name        = "${local.name_prefix}-sg"
   vpc_id      = var.vpc_id
   description = "Security group for EC2 instances"
 
@@ -25,7 +25,7 @@ resource "aws_security_group" "instance_sg" {
   }
 
   tags = {
-    Name = local.name_prefix + "-sg"
+    Name = "${local.name_prefix}-sg"
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_instance" "ec2_instance" {
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
 
   tags = {
-    Name = local.name_prefix + "-" + tostring(count.index)
+    Name = "${local.name_prefix}-${count.index}"
   }
 
   dynamic "ebs_block_device" {
@@ -55,7 +55,7 @@ resource "aws_ebs_volume" "data_volume" {
   size              = var.data_volume_size
 
   tags = {
-    Name = local.name_prefix + "-" + tostring(count.index) + "-data"
+    Name = "${local.name_prefix}-${count.index}-data"
   }
 }
 
