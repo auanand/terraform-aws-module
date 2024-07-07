@@ -77,3 +77,8 @@ variable "elastic_ip_attachment" {
   type        = bool
   default     = false
 }
+
+variable "ssh_key_name" {
+  description = "SSH Key name"
+  type        = string
+}

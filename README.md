@@ -191,6 +191,7 @@ module "ec2_instance_jumpserver" {
   instance_count = 1
   ami_id         = "ami-01376101673c89611"
   instance_type  = "t2.micro"
+  ssh_key_name   = "prod-key"
   vpc_id         = module.vpc.vpc_id
   subnet_ids     = [module.vpc.dmz_subnet_ids[0]]
   instance_name  = "jumpserver"
@@ -231,6 +232,7 @@ output "instance_names" {
 | `instance_count`       | Number of instances to create                    | `number`      | `1`                          | yes      |
 | `ami_id`               | AMI ID for the EC2 instance                      | `string`      | n/a                          | yes      |
 | `instance_type`        | Instance type                                    | `string`      | `t2.micro`                   | yes      |
+| `ssh_key_name`         | SSh Key Name                                     | `string`      | n/a                          | yes       
 | `vpc_id`               | VPC ID for the instances                         | `string`      | n/a                          | yes      |
 | `subnet_ids`           | List of subnet IDs for the instances             | `list(string)`| n/a                          | yes      |
 | `instance_name`        | Name for the EC2 instance                        | `string`      | n/a                          | yes      |

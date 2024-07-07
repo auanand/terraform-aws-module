@@ -32,6 +32,7 @@ resource "aws_security_group" "instance_sg" {
 resource "aws_instance" "ec2_instance" {
   count                  = var.instance_count
   ami                    = var.ami_id
+  key_name               = var.ssh_key_name
   instance_type          = var.instance_type
   subnet_id              = element(var.subnet_ids, count.index % length(var.subnet_ids))
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
